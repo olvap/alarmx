@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :building do
-    name { "MyString" }
+    name { "My Home" }
   end
 end
