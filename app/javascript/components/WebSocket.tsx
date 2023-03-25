@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import * as ReactDOMClient from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import consumer from "../channels/consumer";
 
@@ -32,8 +33,9 @@ function NotFound() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const rootEl = document.getElementById("root");
-  ReactDOM.render(
+  const container = document.getElementById("root");
+  const root = ReactDOMClient.createRoot(container)
+  root.render(
     <BrowserRouter>
       <Routes>
         <Route path="rooms" element={<WebSocket />}>
@@ -41,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>,
-    rootEl
+    </BrowserRouter>
   );
 });
