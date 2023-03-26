@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/buildings", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Building. As you add validations to Building, be sure to
   # adjust the attributes here as well.
@@ -24,6 +24,12 @@ RSpec.describe "/buildings", type: :request do
   let(:invalid_attributes) {
     { name: nil }
   }
+
+  let (:current_user) { FactoryBot.create(:user) }
+
+  before do
+    sign_in current_user
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -77,12 +83,12 @@ RSpec.describe "/buildings", type: :request do
         }.to change(Building, :count).by(0)
       end
 
-    
+
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post buildings_url, params: { building: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
@@ -108,13 +114,13 @@ RSpec.describe "/buildings", type: :request do
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         building = Building.create! valid_attributes
         patch building_url(building), params: { building: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
