@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  namespace :api do
+    resources :sensors, only: [:show]
+  end
+
   resources :rooms, only: [:index, :show]
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Add in our Websocket route
