@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
-    resources :sensors, only: [:show]
+    resources :sensors, only: [:show, :update]
   end
 
   resources :rooms, only: [:index, :show]
