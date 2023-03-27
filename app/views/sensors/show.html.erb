@@ -1,3 +1,12 @@
-<h1>Sensor <%= @sensor.id%></h1>
-<div><%= @sensor.state %></div>
+<p style="color: green"><%= notice %></p>
+
+<%= render @sensor %>
+
 <div id="root"></div>
+
+<div>
+  <%= link_to "Edit this sensor", edit_sensor_path(@sensor) %> |
+  <%= link_to "Back to sensors", sensors_path %>
+
+  <%= button_to "Destroy this sensor", @sensor, method: :delete %>
+</div>
