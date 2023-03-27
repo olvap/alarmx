@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Api credentials</h1>
+
+<div id="api_credentials">
+  <% @api_credentials.each do |api_credential| %>
+    <%= render api_credential %>
+    <p>
+      <%= link_to "Show this api credential", api_credential %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New api credential", new_api_credential_path %>
