@@ -8,3 +8,33 @@
 
   <%= button_to "Destroy this building", @building, method: :delete %>
 </div>
+
+<h2>Sensores</h2>
+<div id='root'></div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>MAC</th>
+      <th>State</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sensors.each do |sensor| %>
+      <tr>
+        <td><%= sensor.name %></td>
+        <td><%= sensor.mac %></td>
+        <td><%= sensor.state %></td>
+        <td>
+          <%= link_to "Show", sensor_path(sensor), class: "btn btn-primary" %>
+          <%= link_to "Edit", edit_sensor_path(sensor), class: "btn btn-warning" %>
+          <%= link_to "Destroy", sensor_path(sensor),
+                      method: :delete, data: { confirm: "Are you sure you want to delete this sensor?" },
+                      class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

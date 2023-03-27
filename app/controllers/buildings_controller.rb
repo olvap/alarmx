@@ -9,6 +9,7 @@ class BuildingsController < ApplicationController
 
   # GET /buildings/1 or /buildings/1.json
   def show
+    @sensors = @building.sensors
   end
 
   # GET /buildings/new
