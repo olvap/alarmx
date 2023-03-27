@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "buildings/edit", type: :view do
+  let(:user) { building.user }
   let(:building) {
-    Building.create!(
-      name: "MyString"
-    )
+    FactoryBot.create(:building)
   }
 
   before(:each) do
     assign(:building, building)
+    sign_in user
   end
 
   it "renders the edit building form" do

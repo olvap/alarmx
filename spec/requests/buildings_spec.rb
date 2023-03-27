@@ -25,117 +25,121 @@ RSpec.describe "/buildings", type: :request do
     { name: nil }
   }
 
-  let (:current_user) { FactoryBot.create(:user) }
+  context "when user is logged in" do
+    let!(:user) { FactoryBot.create(:user) }
+    let!(:other_user) { FactoryBot.create(:user, email: 'other@email.com') }
+    let!(:user_buildings) { FactoryBot.create_list(:building, 3, user: user) }
+    let!(:other_user_buildings) { FactoryBot.create_list(:building, 3, user: other_user) }
 
-  before do
-    sign_in current_user
-  end
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      Building.create! valid_attributes
-      get buildings_url
-      expect(response).to be_successful
+    before { sign_in user }
+
+    describe "GET /index" do
+      it "renders a successful response" do
+        user.buildings.create! valid_attributes
+        get buildings_url
+        expect(response).to be_successful
+      end
     end
-  end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      building = Building.create! valid_attributes
-      get building_url(building)
-      expect(response).to be_successful
+    describe "GET /show" do
+      it "renders a successful response" do
+        building = user.buildings.create! valid_attributes
+        get building_url(building)
+        expect(response).to be_successful
+      end
     end
-  end
 
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_building_url
-      expect(response).to be_successful
+    describe "GET /new" do
+      it "renders a successful response" do
+        get new_building_url
+        expect(response).to be_successful
+      end
     end
-  end
 
-  describe "GET /edit" do
-    it "renders a successful response" do
-      building = Building.create! valid_attributes
-      get edit_building_url(building)
-      expect(response).to be_successful
+    describe "GET /edit" do
+      it "renders a successful response" do
+        building = user.buildings.create! valid_attributes
+        get edit_building_url(building)
+        expect(response).to be_successful
+      end
     end
-  end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Building" do
-        expect {
+    describe "POST /create" do
+      context "with valid parameters" do
+        it "creates a new Building" do
+          expect {
+            post buildings_url, params: { building: valid_attributes }
+          }.to change(Building, :count).by(1)
+        end
+
+        it "redirects to the created building" do
           post buildings_url, params: { building: valid_attributes }
-        }.to change(Building, :count).by(1)
+          expect(response).to redirect_to(building_url(Building.last))
+        end
       end
 
-      it "redirects to the created building" do
-        post buildings_url, params: { building: valid_attributes }
-        expect(response).to redirect_to(building_url(Building.last))
-      end
-    end
+      context "with invalid parameters" do
+        it "does not create a new Building" do
+          expect {
+            post buildings_url, params: { building: invalid_attributes }
+          }.to change(Building, :count).by(0)
+        end
 
-    context "with invalid parameters" do
-      it "does not create a new Building" do
-        expect {
+
+        it "renders a response with 422 status (i.e. to display the 'new' template)" do
           post buildings_url, params: { building: invalid_attributes }
-        }.to change(Building, :count).by(0)
-      end
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
 
-
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post buildings_url, params: { building: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        { name: 'my save house' }
-      }
-
-      it "updates the requested building" do
-        building = Building.create! valid_attributes
-        patch building_url(building), params: { building: new_attributes }
-        building.reload
-        expect(building.name).to eq(new_attributes[:name])
-      end
-
-      it "redirects to the building" do
-        building = Building.create! valid_attributes
-        patch building_url(building), params: { building: new_attributes }
-        building.reload
-        expect(response).to redirect_to(building_url(building))
       end
     end
 
-    context "with invalid parameters" do
+    describe "PATCH /update" do
+      context "with valid parameters" do
+        let(:new_attributes) {
+          { name: 'my save house' }
+        }
 
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        building = Building.create! valid_attributes
-        patch building_url(building), params: { building: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
+        it "updates the requested building" do
+          building = user.buildings.create! valid_attributes
+          patch building_url(building), params: { building: new_attributes }
+          building.reload
+          expect(building.name).to eq(new_attributes[:name])
+        end
+
+        it "redirects to the building" do
+          building = user.buildings.create! valid_attributes
+          patch building_url(building), params: { building: new_attributes }
+          building.reload
+          expect(response).to redirect_to(building_url(building))
+        end
       end
 
-    end
-  end
+      context "with invalid parameters" do
 
-  describe "DELETE /destroy" do
-    it "destroys the requested building" do
-      building = Building.create! valid_attributes
-      expect {
+        it "renders a response with 422 status (i.e. to display the 'edit' template)" do
+          building = user.buildings.create! valid_attributes
+          patch building_url(building), params: { building: invalid_attributes }
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
+
+      end
+    end
+
+    describe "DELETE /destroy" do
+      it "destroys the requested building" do
+        building = user.buildings.create! valid_attributes
+        expect {
+          delete building_url(building)
+        }.to change(Building, :count).by(-1)
+      end
+
+      it "redirects to the buildings list" do
+        building = user.buildings.create! valid_attributes
         delete building_url(building)
-      }.to change(Building, :count).by(-1)
-    end
-
-    it "redirects to the buildings list" do
-      building = Building.create! valid_attributes
-      delete building_url(building)
-      expect(response).to redirect_to(buildings_url)
+        expect(response).to redirect_to(buildings_url)
+      end
     end
   end
 end

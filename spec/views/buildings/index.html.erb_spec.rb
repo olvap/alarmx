@@ -1,12 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "buildings/index", type: :view do
+  let!(:user) { FactoryBot.create(:user) }
+  before { sign_in user }
   before(:each) do
     assign(:buildings, [
       Building.create!(
+        user: user,
         name: "Name"
       ),
       Building.create!(
+        user: user,
         name: "Name"
       )
     ])
