@@ -7,16 +7,15 @@ RSpec.describe "Api::Sensors", type: :request do
   let(:api_credential) { create(:api_credential, user: user) }
 
   describe "GET /show" do
-    before do
+    it "returns http success" do
       get "/api/sensors/#{sensor.id}",
         headers: { 'Authorization' => "Token #{api_credential.token}" }
-    end
-
-    it "returns http success" do
       expect(response).to have_http_status(:success)
     end
 
     it "returns the sensor data as JSON" do
+      binding.pry
+      get "/api/sensors/#{sensor.id}"
       json_response = JSON.parse(response.body)
       expect(json_response["name"]).to eq("Sensor1")
       expect(json_response["state"]).to eq(true)

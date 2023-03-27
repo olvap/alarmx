@@ -1,6 +1,9 @@
 module Api
   class SensorsController < ApplicationController
+    include ApiKeyAuthenticatable
     protect_from_forgery with: :null_session
+
+    prepend_before_action :authenticate_with_api_key!, only: [:show]
 
     def show
       render json: sensor
