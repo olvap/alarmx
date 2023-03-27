@@ -1,7 +1,7 @@
 module Api
   class SensorsController < ApplicationController
-    include ApiKeyAuthenticatable
     protect_from_forgery with: :null_session
+    include ApiKeyAuthenticatable
 
     prepend_before_action :authenticate_with_api_key!
 
@@ -23,7 +23,7 @@ module Api
     def update
       if sensor.update(sensor_params)
         ActionCable.server.broadcast(
-          "Sensor_#{sensor.id}",
+          "sensor_channel_#{sensor.id}",
           { message: sensor.state.to_s }
         )
 

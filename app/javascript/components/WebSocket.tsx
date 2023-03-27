@@ -10,7 +10,7 @@ function WebSocket() {
 
   React.useEffect(() => {
     consumer.subscriptions.create(
-      { channel: "RoomChannel", room_id: params.room_id ?? undefined },
+      { channel: "SensorChannel", id: params.id ?? undefined },
       {
         received(data) {
           setMessages([...messages, data.message]);
@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
   root.render(
     <BrowserRouter>
       <Routes>
-        <Route path="rooms" element={<WebSocket />}>
-          <Route path=":room_id" element={<WebSocket />} />
+        <Route path="sensors" element={<WebSocket />}>
+          <Route path=":id" element={<WebSocket />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
