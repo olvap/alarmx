@@ -3,15 +3,29 @@ module Api
     include ApiKeyAuthenticatable
     protect_from_forgery with: :null_session
 
-    prepend_before_action :authenticate_with_api_key!, only: [:show]
+    prepend_before_action :authenticate_with_api_key!
 
     def show
       render json: sensor
     end
 
+    def create
+      @sensor = current_bearer.sensors.new(create_sensor_params)
+
+        if @sensor.save
+          render json: @sensor, status: :created
+        else
+          render json: @sensor.errors, status: :unprocessable_entity
+      end
+
+    end
+
     def update
       if sensor.update(sensor_params)
-        ActionCable.server.broadcast("room_channel_12", { message: sensor.state.to_s })
+        ActionCable.server.broadcast(
+          "Sensor_#{sensor.id}",
+          { message: sensor.state.to_s }
+        )
 
         render json: sensor, status: :ok
       else
@@ -23,7 +37,11 @@ module Api
     private
 
     def sensor
-      @sensor = Sensor.find(params[:id])
+      @sensor = current_bearer.sensors.find(params[:id])
+    end
+
+    def create_sensor_params
+      params.require(:sensor).permit(:mac)
     end
 
     def sensor_params

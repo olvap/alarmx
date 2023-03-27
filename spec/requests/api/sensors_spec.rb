@@ -1,10 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe "Api::Sensors", type: :request do
-  let(:sensor) { create(:sensor, name: 'Sensor1', state: true) }
+  let(:sensor) { create(:sensor, name: 'Sensor1', state: true, user: user) }
   let(:building) { sensor.building }
-  let(:user) { building.user }
+  let!(:user) { create(:user) }
   let(:api_credential) { create(:api_credential, user: user) }
+
+  let(:valid_attributes) {
+    {
+      mac: '12:12:12:12:2b'
+    }
+  }
+
+  let(:invalid_attributes) {
+    { mac: nil }
+  }
+
+  describe "POST /create" do
+    context "with valid parameters" do
+      it "creates a new Sensor" do
+        expect {
+          post '/api/sensors', params: { sensor: valid_attributes },
+          headers: { 'Authorization' => "Token #{api_credential.token}" }
+        }.to change(Sensor, :count).by(1)
+      end
+    end
+
+    context "with invalid parameters" do
+      it "does not create a new Building" do
+        expect {
+          post '/api/sensors', params: { sensor: invalid_attributes },
+          headers: { 'Authorization' => "Token #{api_credential.token}" }
+        }.to change(Sensor, :count).by(0)
+      end
+    end
+  end
 
   describe "GET /show" do
     before do
@@ -35,7 +65,8 @@ RSpec.describe "Api::Sensors", type: :request do
     end
 
     it "updates the state of the sensor" do
-      put "/api/sensors/#{sensor.id}", params: { sensor: { state: false } }
+      put "/api/sensors/#{sensor.id}", params: { sensor: { state: false } },
+        headers: { 'Authorization' => "Token #{api_credential.token}" }
       sensor.reload
       expect(sensor.state).to eq(false)
     end

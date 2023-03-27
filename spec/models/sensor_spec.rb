@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe Sensor, type: :model do
   context "when creating a new sensor" do
     let(:building) { create(:building) }
-    let(:sensor) { create(:sensor, building: building) }
+    let(:user) { building.user }
+    let(:sensor) { create(:sensor, building: building, user: user) }
 
     it "has a reference to building" do
       expect(sensor.building).to eq(building)

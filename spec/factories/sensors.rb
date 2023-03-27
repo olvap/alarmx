@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :sensor do
-    building
     name { 'DoorSensor' }
+    mac { '12:13:13:12' }
     state { false }
   end
 end

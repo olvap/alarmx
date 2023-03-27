@@ -1,3 +1,6 @@
 class Sensor < ApplicationRecord
-  belongs_to :building
+  validates :mac, presence: true
+
+  belongs_to :building, optional: true
+  belongs_to :user, optional: true
 end

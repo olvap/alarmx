@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :api_credentials, only: [:new, :create, :show, :index, :destroy]
 
   namespace :api do
-    resources :sensors, only: [:show, :update]
+    resources :sensors, only: [:show, :create, :update]
   end
 
   resources :rooms, only: [:index, :show]
