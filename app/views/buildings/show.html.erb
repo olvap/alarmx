@@ -22,10 +22,10 @@
   </thead>
   <tbody>
     <% @sensors.each do |sensor| %>
-      <tr>
-        <td><%= sensor.name %></td>
-        <td><%= sensor.mac %></td>
-        <td><%= sensor.state %></td>
+      <tr id="sensor-<%= sensor.id %>">
+        <td class="sensor-name"><%= sensor.name %></td>
+        <td class="sensor-mac"><%= sensor.mac %></td>
+        <td class="sensor-state"><%= sensor.state %></td>
         <td>
           <%= link_to "Show", sensor_path(sensor), class: "btn btn-primary" %>
           <%= link_to "Edit", edit_sensor_path(sensor), class: "btn btn-warning" %>

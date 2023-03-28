@@ -26,6 +26,7 @@ module Api
           "sensor_channel_#{sensor.id}",
           { message: sensor.state.to_s }
         )
+        ActionCable.server.broadcast 'sensor_channel', {sensor: @sensor }
 
         render json: sensor, status: :ok
       else
