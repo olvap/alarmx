@@ -6,5 +6,5 @@
 
 <div>
   <%= link_to "Show this sensor", @sensor %> |
-  <%= link_to "Back to sensors", sensors_path %>
+  <%= link_to "Back to sensors", building_path(@sensor.building) %>
 </div>

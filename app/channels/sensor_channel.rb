@@ -3,7 +3,7 @@ class SensorChannel < ApplicationCable::Channel
     if params[:id]
       stream_from "sensor_channel_#{params[:id]}" if params[:id]
     else
-      stream_from 'building_channel'
+      stream_from 'sensor_channel'
     end
   end
 
@@ -16,7 +16,7 @@ class SensorChannel < ApplicationCable::Channel
     if params[:id]
       ActionCable.server.broadcast "sensor_channel_#{params[:id]}", message: data['message']
     else
-      ActionCable.server.broadcast 'building_channel', message: data['message']
+      ActionCable.server.broadcast 'sensor_channel', message: data['message']
     end
   end
 end

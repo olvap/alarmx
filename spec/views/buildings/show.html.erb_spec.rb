@@ -7,6 +7,7 @@ RSpec.describe "buildings/show", type: :view do
   }
   before(:each) do
     assign(:building, building)
+    assign(:sensors, [])
     sign_in user
   end
 

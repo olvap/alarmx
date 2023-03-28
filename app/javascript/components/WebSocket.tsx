@@ -4,6 +4,12 @@ import * as ReactDOMClient from 'react-dom/client';
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import consumer from "../channels/consumer";
 
+function BuildingApp() {
+  return (
+    <div>BuildingApp</div>
+  );
+}
+
 function WebSocket() {
   const [messages, setMessages] = React.useState([]);
   const params = useParams();
@@ -40,6 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <Routes>
         <Route path="sensors" element={<WebSocket />}>
           <Route path=":id" element={<WebSocket />} />
+        </Route>
+        <Route path="buildings">
+          <Route path=":id" element={<BuildingApp />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

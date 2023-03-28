@@ -11,7 +11,24 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
+  <body class="<%= controller_name %>">
+    <p style="color: green"><%= notice %></p>
+
     <%= yield %>
+    <% if current_user %>
+    <nav class="menu">
+      <ol>
+        <li>
+          <%= link_to "", buildings_path, class: "menu-item menu-item-building" %>
+        </li>
+        <li>
+          <%= link_to "", "#", class: "menu-item menu-item-user" %>
+        </li>
+        <li>
+          <%= link_to "", "#", class: "menu-item menu-item-notifications" %>
+        </li>
+      </ol>
+    </nav>
+  <% end %>
   </body>
 </html>

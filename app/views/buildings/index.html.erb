@@ -1,14 +1,12 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Buildings</h1>
-
-<div id="buildings">
+<h2>Buldings</h2>
+<ul class="resource__list">
   <% @buildings.each do |building| %>
-    <%= render building %>
-    <p>
-      <%= link_to "Show this building", building %>
-    </p>
+    <li class="resource__item">
+      <%= link_to building.name, building_path(building) %>
+    </li>
   <% end %>
-</div>
+</ul>
 
-<%= link_to "New building", new_building_path %>
+<div class="resource__actions">
+  <%= link_to "Add new building", new_building_path, class: "button button--add" %>
+</div>

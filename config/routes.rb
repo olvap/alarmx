@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pages/home'
   devise_for :users
   resources :buildings
   resources :sensors
@@ -17,5 +18,5 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   # Defines the root path route ("/")
-  root "rooms#index"
+  root "pages#home"
 end
