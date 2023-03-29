@@ -1,7 +1,7 @@
 <h2>Buldings</h2>
-<ul class="resource__list">
+<ul class="collection">
   <% @buildings.each do |building| %>
-    <li class="resource__item">
+    <li class="collection-item">
       <%= link_to building.name, building_path(building) %>
     </li>
   <% end %>

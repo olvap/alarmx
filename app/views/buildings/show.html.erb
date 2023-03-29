@@ -1,13 +1,12 @@
-<h2 class="resource-title">
+<h2>
   <%= @building.name %>
-  <%= link_to image_tag("gear.svg"), edit_building_path(@building), class:"icon icon--edit" %>
 </h2>
 
-<ul class="resource__list">
+<ul class="collection">
   <% @sensors.each do |sensor| %>
     <li
         id="sensor-<%= sensor.id%>"
-        class="resource__item <% if sensor.state  %> resource__item--green<% else %>resource__item--red<% end %>" >
+        class="collection-item <% if sensor.state  %> resource__item--green<% else %>resource__item--red<% end %>" >
       <%= link_to sensor.name, sensor_path(sensor) %>
     </li>
   <% end %>
