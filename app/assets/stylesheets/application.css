@@ -46,3 +46,8 @@ body.pages {
   justify-content: center;
   height: 100vh;
 }
+
+.collection-item.teal a,
+.collection-item.red a {
+  color: white;
+}

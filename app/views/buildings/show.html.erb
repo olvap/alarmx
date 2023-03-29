@@ -6,7 +6,7 @@
   <% @sensors.each do |sensor| %>
     <li
         id="sensor-<%= sensor.id%>"
-        class="collection-item <% if sensor.state  %> resource__item--green<% else %>resource__item--red<% end %>" >
+        class="collection-item <% if sensor.state  %>teal<% else %>red<% end %>" >
       <%= link_to sensor.name, sensor_path(sensor) %>
     </li>
   <% end %>

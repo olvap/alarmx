@@ -10,11 +10,11 @@ consumer.subscriptions.create("SensorChannel", {
     console.log("tr: ", sensorRow)
     if (sensorRow) {
       if(sensorState){
-        sensorRow.classList.remove('resource__item--red');
-        sensorRow.classList.add('resource__item--green');
+        sensorRow.classList.remove('red');
+        sensorRow.classList.add('teal');
       }else{
-        sensorRow.classList.add('resource__item--red');
-        sensorRow.classList.remove('resource__item--green');
+        sensorRow.classList.add('red');
+        sensorRow.classList.remove('teal');
       }
     }
   }
