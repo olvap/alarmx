@@ -9,6 +9,6 @@ class Sensor < ApplicationRecord
   private
 
   def set_default_building
-    self.building ||= user.buildings.first
+    self.building ||= user&.buildings&.first
   end
 end

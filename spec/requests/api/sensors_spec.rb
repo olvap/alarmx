@@ -8,7 +8,7 @@ RSpec.describe "Api::Sensors", type: :request do
 
   let(:valid_attributes) {
     {
-      mac: '12:12:12:12:2b'
+      mac: '121212122b'
     }
   }
 
@@ -33,6 +33,23 @@ RSpec.describe "Api::Sensors", type: :request do
           headers: { 'Authorization' => "Token #{api_credential.token}" }
         }.to change(Sensor, :count).by(0)
       end
+    end
+  end
+
+  describe "GET /mac" do
+    before do
+      get "/api/sensors/#{sensor.mac}/mac",
+        headers: { 'Authorization' => "Token #{api_credential.token}" }
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "returns the sensor data as JSON" do
+      json_response = JSON.parse(response.body)
+      expect(json_response["name"]).to eq("Sensor1")
+      expect(json_response["state"]).to eq(true)
     end
   end
 

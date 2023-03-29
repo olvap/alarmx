@@ -11,8 +11,8 @@ RSpec.describe "buildings/show", type: :view do
     sign_in user
   end
 
-  it "renders attributes in <p>" do
+  it "renders attributes in <h2>" do
     render
-    expect(rendered).to match(/Name/)
+    expect(rendered).to match(building.name)
   end
 end

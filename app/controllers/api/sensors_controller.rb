@@ -9,6 +9,12 @@ module Api
       render json: sensor
     end
 
+    def mac
+      sensor = current_bearer.sensors.find_by(params[:mac])
+
+      render json: sensor
+    end
+
     def create
       @sensor = current_bearer.sensors.new(create_sensor_params)
 

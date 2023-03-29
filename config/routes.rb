@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resources :api_credentials, only: [:new, :create, :show, :index, :destroy]
 
   namespace :api do
-    resources :sensors, only: [:show, :create, :update]
+    resources :sensors, only: [:show, :create, :update] do
+      member do
+        get :mac
+      end
+    end
     resources :buildings, only: [:show, :index]
   end
 
