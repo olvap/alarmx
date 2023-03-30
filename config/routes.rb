@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  resources :emitters
   resource :setting
   get 'pages/home'
   devise_for :users
   resources :buildings
   resources :sensors
-  resources :emitter
   resources :api_credentials, only: [:new, :create, :show, :index, :destroy]
 
   namespace :api do

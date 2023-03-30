@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :emitter do
-    building { nil }
+    building
     token { "ABC123" }
   end
 end
+

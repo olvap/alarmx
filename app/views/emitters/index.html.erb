@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Emitters</h1>
+
+<div id="emitters">
+  <% @emitters.each do |emitter| %>
+    <%= render emitter %>
+    <p>
+      <%= link_to "Show this emitter", emitter %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New emitter", new_emitter_path %>
