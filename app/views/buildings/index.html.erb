@@ -7,6 +7,9 @@
   <% end %>
 </ul>
 
-<div class="resource__actions">
-  <%= link_to "Add new building", new_building_path, class: "button button--add" %>
+<div class="right-align">
+  <%= link_to new_building_path, class: "btn-floating waves-effect waves-light" do %>
+  <i class="material-icons">add</i>
+<% end %>
+
 </div>

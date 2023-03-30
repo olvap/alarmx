@@ -1,4 +1,9 @@
-<h2><%= @building.name %></h2>
+<h2>
+  <%= @building.name %>
+  <%= link_to edit_building_path(@building) do %>
+    <i class="tiny material-icons">edit</i>
+  <% end %>
+</h2>
 
 <ul class="collection">
   <% @sensors.each do |sensor| %>
