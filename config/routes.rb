@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :emitters, only: [:index]
   resources :buildings do
+    collection do
+      get :favorite
+    end
     resources :emitters
   end
   resource :setting

@@ -1,6 +1,6 @@
 class BuildingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_building, only: %i[ show edit update destroy ]
+  before_action :set_building, only: %i[ show edit update destroy]
 
   # GET /buildings or /buildings.json
   def index
@@ -10,6 +10,13 @@ class BuildingsController < ApplicationController
   # GET /buildings/1 or /buildings/1.json
   def show
     @sensors = @building.sensors
+  end
+
+  def favorite
+    @building = current_user.buildings.first
+    @sensors = @building.sensors
+
+    render :show
   end
 
   # GET /buildings/new
