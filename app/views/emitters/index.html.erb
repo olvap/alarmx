@@ -1,10 +1,9 @@
-<h1>Emitters</h1>
+<h2>Emitters</h2>
 
-<div id="emitters">
+<ul class="collection">
   <% @emitters.each do |emitter| %>
-    <%= render emitter %>
-    <p>
-    <%= link_to "Show this emitter", building_emitter_path(emitter.building, emitter) %>
-    </p>
+    <li class="collection-item">
+      <%= link_to emitter.name, building_emitter_path(emitter.building, emitter) %>
+    </li>
   <% end %>
-</div>
+</ul>

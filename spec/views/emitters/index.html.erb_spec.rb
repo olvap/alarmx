@@ -10,8 +10,8 @@ RSpec.describe "emitters/index", type: :view do
 
   it "renders a list of emitters" do
     render
-    cell_selector = Rails::VERSION::STRING >= '7' ? 'div>p' : 'tr>td'
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Token".to_s), count: 2
+    cell_selector = 'ul>li'
+    name = emitters.first.name
+    assert_select cell_selector, text: Regexp.new(name), count: 2
   end
 end
