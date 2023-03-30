@@ -1,14 +1,15 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Emitters</h1>
 
 <div id="emitters">
   <% @emitters.each do |emitter| %>
     <%= render emitter %>
     <p>
-      <%= link_to "Show this emitter", emitter %>
+    <%= link_to "Show this emitter", building_emitter_path(@building, emitter) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New emitter", new_emitter_path %>
+<div class="right-align">
+  <%= link_to new_building_emitter_path(@building), class: "btn-floating waves-effect waves-light" do %>
+  <i class="material-icons">add</i>
+<% end %>

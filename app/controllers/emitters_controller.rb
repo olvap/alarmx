@@ -1,5 +1,7 @@
 class EmittersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_emitter, only: %i[ show edit update destroy ]
+  before_action :set_building
 
   # GET /emitters or /emitters.json
   def index
@@ -21,11 +23,11 @@ class EmittersController < ApplicationController
 
   # POST /emitters or /emitters.json
   def create
-    @emitter = Emitter.new(emitter_params)
+    @emitter = @building.emitters.new(emitter_params)
 
     respond_to do |format|
       if @emitter.save
-        format.html { redirect_to emitter_url(@emitter), notice: "Emitter was successfully created." }
+        format.html { redirect_to building_emitter_url(@building, @emitter), notice: "Emitter was successfully created." }
         format.json { render :show, status: :created, location: @emitter }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +40,7 @@ class EmittersController < ApplicationController
   def update
     respond_to do |format|
       if @emitter.update(emitter_params)
-        format.html { redirect_to emitter_url(@emitter), notice: "Emitter was successfully updated." }
+        format.html { redirect_to building_emitter_url(@building, @emitter), notice: "Emitter was successfully updated." }
         format.json { render :show, status: :ok, location: @emitter }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,19 +54,22 @@ class EmittersController < ApplicationController
     @emitter.destroy
 
     respond_to do |format|
-      format.html { redirect_to emitters_url, notice: "Emitter was successfully destroyed." }
+      format.html { redirect_to building_emitters_url(@building), notice: "Emitter was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_emitter
-      @emitter = Emitter.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def emitter_params
-      params.require(:emitter).permit(:name, :token)
-    end
+  def set_building
+    @building = current_user.buildings.find(params[:building_id])
+  end
+
+  def set_emitter
+    @emitter = Emitter.find(params[:id])
+  end
+
+  def emitter_params
+    params.require(:emitter).permit(:name)
+  end
 end

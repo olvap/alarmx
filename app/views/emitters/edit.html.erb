@@ -1,10 +1,10 @@
 <h1>Editing emitter</h1>
 
-<%= render "form", emitter: @emitter %>
+<%= render "form", emitter: @emitter, building: @building %>
 
 <br>
 
 <div>
-  <%= link_to "Show this emitter", @emitter %> |
-  <%= link_to "Back to emitters", emitters_path %>
+  <%= link_to "Show this emitter", building_emitter_path(@building, @emitter) %> |
+  <%= link_to "Back to emitters", building_emitters_path(@building) %>
 </div>

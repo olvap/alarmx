@@ -5,6 +5,7 @@ RSpec.describe "emitters/index", type: :view do
   let(:emitters) { create_list(:emitter, 2, building: building) }
   before(:each) do
     assign(:emitters, emitters)
+    assign(:building, building)
   end
 
   it "renders a list of emitters" do

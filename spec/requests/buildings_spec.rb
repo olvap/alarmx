@@ -27,10 +27,6 @@ RSpec.describe "/buildings", type: :request do
 
   context "when user is logged in" do
     let!(:user) { FactoryBot.create(:user) }
-    let!(:other_user) { FactoryBot.create(:user, email: 'other@email.com') }
-    let!(:user_buildings) { FactoryBot.create_list(:building, 3, user: user) }
-    let!(:other_user_buildings) { FactoryBot.create_list(:building, 3, user: other_user) }
-
 
     before { sign_in user }
 

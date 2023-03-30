@@ -1,10 +1,8 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @emitter %>
 
 <div>
-  <%= link_to "Edit this emitter", edit_emitter_path(@emitter) %> |
-  <%= link_to "Back to emitters", emitters_path %>
+  <%= link_to 'Edit', edit_building_emitter_path(@emitter.building, @emitter) %> |
+  <%= link_to 'Back', building_emitters_path(@emitter.building) %>
 
-  <%= button_to "Destroy this emitter", @emitter, method: :delete %>
+  <%= link_to 'Delete', building_emitter_path(@emitter.building, @emitter), method: :delete, data: { confirm: 'Are you sure?' } %>
 </div>
