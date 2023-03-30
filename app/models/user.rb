@@ -7,4 +7,14 @@ class User < ApplicationRecord
   has_many :buildings
   has_many :api_credentials
   has_many :sensors
+
+  has_one :setting
+
+  after_create :create_setting
+
+  private
+
+  def create_setting
+    self.setting ||= Setting.create(user: self)
+  end
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :setting
   get 'pages/home'
   devise_for :users
   resources :buildings

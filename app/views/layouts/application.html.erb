@@ -32,7 +32,11 @@
               <%= link_to buildings_path do %>
                 <i class="material-icons">home</i>
               <% end %>
-            <li><a href="/users/edit"><i class="material-icons">manage_accounts</i></a></li>
+            <li>
+              <%= link_to setting_path do %>
+                <i class="material-icons">manage_accounts</i>
+              <% end %>
+            </li>
             <li>
               <%= link_to api_credentials_path do %>
                 <i class="material-icons">notifications</i>
