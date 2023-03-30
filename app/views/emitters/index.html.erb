@@ -4,12 +4,7 @@
   <% @emitters.each do |emitter| %>
     <%= render emitter %>
     <p>
-    <%= link_to "Show this emitter", building_emitter_path(@building, emitter) %>
+    <%= link_to "Show this emitter", building_emitter_path(emitter.building, emitter) %>
     </p>
   <% end %>
 </div>
-
-<div class="right-align">
-  <%= link_to new_building_emitter_path(@building), class: "btn-floating waves-effect waves-light" do %>
-  <i class="material-icons">add</i>
-<% end %>

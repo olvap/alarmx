@@ -1,11 +1,11 @@
 class EmittersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_emitter, only: %i[ show edit update destroy ]
-  before_action :set_building
+  before_action :set_building, only: %i[ show edit update destroy new create ]
 
   # GET /emitters or /emitters.json
   def index
-    @emitters = Emitter.all
+    @emitters = current_user.emitters
   end
 
   # GET /emitters/1 or /emitters/1.json

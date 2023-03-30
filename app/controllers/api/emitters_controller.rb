@@ -33,7 +33,7 @@ module Api
     private
 
     def emitter
-      @emitter = Emitter.find_by(token: params[:emitter_token])
+      @emitter = Emitter.find_or_create_by(token: params[:emitter_token])
     end
 
     def emitter_params
