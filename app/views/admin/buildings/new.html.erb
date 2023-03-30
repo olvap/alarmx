@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col s12">
+    <h3>Nuevo edificio</h3>
+  </div>
+</div>
+
+<%= render 'form', building: @building %>
+
+<div class="row">
+  <div class="col s12">
+    <%= link_to 'Cancelar', admin_buildings_path, class: 'waves-effect waves-light btn-flat' %>
+  </div>
+</div>

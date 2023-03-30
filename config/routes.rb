@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :buildings
+  end
   get 'pages/home'
   devise_for :users
   resources :emitters, only: [:index]

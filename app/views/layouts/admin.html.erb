@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <meta charset="UTF-8">
+    <title>AlarmX</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@materializecss/materialize@1.2.2/dist/css/materialize.min.css">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@materializecss/materialize@1.2.2/dist/js/materialize.min.js"></script>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+
+  <body class="<%= controller_name %>">
+    <!-- <p style="color: green"><%= notice %></p> -->
+
+    <% if current_user %>
+
+      <nav>
+        <div class="nav-wrapper green">
+          <ul class="right">
+          </ul>
+        </div>
+      </nav>
+
+    <% else %>
+
+    <% end %>
+
+    <div class="container">
+    <%= yield %>
+    </div>
+  </body>
+</html>
