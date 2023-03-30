@@ -49,7 +49,7 @@ module Api
           "sensor_channel_#{sensor.id}",
           { message: sensor.state.to_s }
         )
-        ActionCable.server.broadcast 'sensor_channel', {emitter: sensor }
+        ActionCable.server.broadcast 'sensor_channel', {sensor: sensor }
     end
   end
 end
