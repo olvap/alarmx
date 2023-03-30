@@ -1,14 +1,17 @@
 Rails.application.routes.draw do
-  resource :setting
   get 'pages/home'
   devise_for :users
   resources :buildings do
     resources :emitters
   end
+  resource :setting
   resources :sensors
   resources :api_credentials, only: [:new, :create, :show, :index, :destroy]
 
   namespace :api do
+    resources :emitters, param: :token, only: [:create] do
+      put '/:pin', to: 'emitters#sensor_update', as: 'emitter_sensor_update'
+    end
     resources :sensors, only: [:show, :create, :update] do
       member do
         get :mac

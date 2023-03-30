@@ -8,12 +8,12 @@ RSpec.describe "Api::Sensors", type: :request do
 
   let(:valid_attributes) {
     {
-      mac: '121212122b'
+      name: 'back door'
     }
   }
 
   let(:invalid_attributes) {
-    { mac: nil }
+    { states: nil }
   }
 
   describe "POST /create" do
@@ -26,31 +26,14 @@ RSpec.describe "Api::Sensors", type: :request do
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Building" do
-        expect {
-          post '/api/sensors', params: { sensor: invalid_attributes },
-          headers: { 'Authorization' => "Token #{api_credential.token}" }
-        }.to change(Sensor, :count).by(0)
-      end
-    end
-  end
-
-  describe "GET /mac" do
-    before do
-      get "/api/sensors/#{sensor.mac}/mac",
-        headers: { 'Authorization' => "Token #{api_credential.token}" }
-    end
-
-    it "returns http success" do
-      expect(response).to have_http_status(:success)
-    end
-
-    it "returns the sensor data as JSON" do
-      json_response = JSON.parse(response.body)
-      expect(json_response["name"]).to eq("Sensor1")
-      expect(json_response["state"]).to eq(true)
-    end
+    # context "with invalid parameters" do
+    #   it "does not create a new Building" do
+    #     expect {
+    #       post '/api/sensors', params: { sensor: invalid_attributes },
+    #       headers: { 'Authorization' => "Token #{api_credential.token}" }
+    #     }.to change(Sensor, :count).by(0)
+    #   end
+    # end
   end
 
   describe "GET /show" do

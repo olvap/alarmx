@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :buildings
   has_many :api_credentials
+  has_many :emitters, through: :buildings
   has_many :sensors
 
   has_one :setting

@@ -9,12 +9,6 @@ module Api
       render json: sensor
     end
 
-    def mac
-      sensor = current_bearer.sensors.find_by(params[:mac])
-
-      render json: sensor
-    end
-
     def create
       @sensor = current_bearer.sensors.new(create_sensor_params)
 
@@ -28,17 +22,12 @@ module Api
 
     def update
       if sensor.update(sensor_params)
-        ActionCable.server.broadcast(
-          "sensor_channel_#{sensor.id}",
-          { message: sensor.state.to_s }
-        )
-        ActionCable.server.broadcast 'sensor_channel', {sensor: @sensor }
+        action_cable(sensor)
 
         render json: sensor, status: :ok
       else
         render json: { errors: @sensor.errors.full_messages }, status: :unprocessable_entity
       end
-
     end
 
     private
@@ -53,6 +42,14 @@ module Api
 
     def sensor_params
       params.require(:sensor).permit(:name, :state)
+    end
+
+    def action_cable(sensor)
+        ActionCable.server.broadcast(
+          "sensor_channel_#{sensor.id}",
+          { message: sensor.state.to_s }
+        )
+        ActionCable.server.broadcast 'sensor_channel', {sensor: sensor }
     end
   end
 end
