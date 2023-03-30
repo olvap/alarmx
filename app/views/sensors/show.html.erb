@@ -1,4 +1,9 @@
-<h2><%= @sensor.name %></h2>
+<h2>
+  <%= @sensor.name %>
+  <%= link_to edit_sensor_path(@sensor) do %>
+    <i class="tiny material-icons">edit</i>
+  <% end %>
+</h2>
 
 <div id="sensor-<%= @sensor.id%>">
   <p>

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :buildings
   resources :sensors
+  resources :emitter
   resources :api_credentials, only: [:new, :create, :show, :index, :destroy]
 
   namespace :api do

@@ -3,3 +3,4 @@ import "@hotwired/turbo-rails"
 import "./components/WebSocket";
 import "./channels/sensors";
 
+M.AutoInit();
