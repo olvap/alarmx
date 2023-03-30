@@ -24,13 +24,7 @@ Rails.application.routes.draw do
     resources :buildings, only: [:show, :index]
   end
 
-  resources :rooms, only: [:index, :show]
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Add in our Websocket route
   mount ActionCable.server => '/cable'
 
-  # Defines the root path route ("/")
   root "pages#home"
 end
