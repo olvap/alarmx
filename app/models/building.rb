@@ -3,5 +3,5 @@ class Building < ApplicationRecord
 
   belongs_to :user
   has_many :emitters
-  has_many :sensors
+  has_many :sensors, through: :emitters
 end

@@ -20,10 +20,11 @@ module Api
     def sensor_update
       sensor = emitter.sensors.find_or_create_by(pin: params[:pin])
 
+
       if sensor.update(update_state_params)
         action_cable(sensor)
 
-        render json: emitter, status: :ok
+        render json: sensor, status: :ok
       else
         render json: { errors: @emitter.errors.full_messages }, status: :unprocessable_entity
       end

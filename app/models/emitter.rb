@@ -8,6 +8,6 @@ class Emitter < ApplicationRecord
   private
 
   def set_token
-    self.token = SecureRandom.hex(16)
+    self.token ||= SecureRandom.hex(16)
   end
 end
