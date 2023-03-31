@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col s12">
+    <h3>Sensores</h3>
+    <%= link_to 'Nuevo edificio', new_admin_sensor_path, class: 'btn btn-small' %>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Emitter</th>
+          <th>State</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sensors.each do |sensor| %>
+          <tr>
+            <td><%= sensor.name %></td>
+            <td><%= sensor.emitter&.name %></td>
+            <td><%= sensor.state %></td>
+            <td>
+              <%= link_to 'Ver', admin_sensor_path(sensor), class: 'btn btn-small' %>
+              <%= link_to 'Editar', edit_admin_sensor_path(sensor), class: 'btn btn-small' %>
+              <%= link_to 'Eliminar', admin_sensor_path(sensor), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este edificio?' }, class: 'btn btn-small red darken-2' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

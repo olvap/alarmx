@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col s12">
+    <h3>Edificios</h3>
+    <%= link_to 'Nuevo edificio', new_admin_emitter_path, class: 'btn btn-small' %>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Propietario</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @emitters.each do |emitter| %>
+          <tr>
+            <td><%= emitter.name %></td>
+            <td><%= emitter.building.name %></td>
+            <td>
+              <%= link_to 'Ver', admin_emitter_path(emitter), class: 'btn btn-small' %>
+              <%= link_to 'Editar', edit_admin_emitter_path(emitter), class: 'btn btn-small' %>
+              <%= link_to 'Eliminar', admin_emitter_path(emitter), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este edificio?' }, class: 'btn btn-small red darken-2' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

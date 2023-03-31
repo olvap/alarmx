@@ -1,0 +1,18 @@
+<%= form_with(model: [:admin, @sensor], html: {class: "form"}) do |f| %>
+  <div class="row">
+    <div class="col s12 input-field">
+      <%= f.label :name %>
+      <%= f.text_field :name, id: :sensor_name %>
+    </div>
+    <div class="col s12 input-field">
+      <%= f.label :building %>
+      <%= f.collection_select :building_id, Building.all, :id, :name, prompt: "Seleccione un building" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <%= f.submit class: "btn" %>
+    </div>
+  </div>
+<% end %>
+

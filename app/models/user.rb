@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   after_create :create_setting
 
+  def admin?
+    email == 'oldani.pablo@gmail.com'
+  end
+
   private
 
   def create_setting

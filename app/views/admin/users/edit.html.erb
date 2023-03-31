@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col s12">
+    <h3>Editar User</h3>
+  </div>
+</div>
+
+<%= render 'form', user: @user %>
+
+<div class="row">
+  <div class="col s12">
+    <%= link_to 'Volver', admin_user_path(@user), class: 'waves-effect waves-light btn-flat' %>
+  </div>
+</div>

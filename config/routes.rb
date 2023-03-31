@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :buildings
+    resources :emitters
+    resources :sensors
+    resources :users
   end
   get 'pages/home'
   devise_for :users

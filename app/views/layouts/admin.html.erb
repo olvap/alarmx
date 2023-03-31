@@ -24,10 +24,17 @@
     <!-- <p style="color: green"><%= notice %></p> -->
 
     <% if current_user %>
-
       <nav>
-        <div class="nav-wrapper green">
-          <ul class="right">
+        <div class="nav-wrapper blue-grey darken-3">
+          <a href="#" class="brand-logo center">Admin Panel</a>
+          <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><%= link_to 'Buildings', admin_buildings_path %></li>
+            <li><%= link_to 'Emitters', admin_emitters_path %></li>
+            <li><%= link_to 'Sensors', admin_sensors_path %></li>
+            <li><%= link_to 'Users', admin_users_path %></li>
+          </ul>
+          <ul class="right hide-on-med-and-down">
+            <li><%= link_to 'Logout', destroy_user_session_path, method: :get %></li>
           </ul>
         </div>
       </nav>
