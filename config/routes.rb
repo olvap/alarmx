@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :emitters
     resources :sensors
     resources :users
+    resources :settings
   end
   get 'pages/home'
   devise_for :users

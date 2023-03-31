@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col s12">
+    <h3><%= @setting.name %></h3>
+    <p><strong>User:</strong> <%= @setting.user.email %></p>
+    <%= link_to 'Editar', edit_admin_setting_path(@setting), class: 'btn btn-small' %>
+    <%= link_to 'Eliminar', admin_setting_path(@setting), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este setting?' }, class: 'btn btn-small red darken-2' %>
+  </div>
+</div>
+

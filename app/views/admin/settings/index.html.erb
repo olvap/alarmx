@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col s12">
+    <h3>Setting</h3>
+    <%= link_to 'Nuevo Setting', new_admin_setting_path, class: 'btn btn-small' %>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>User_id</th>
+          <th>Chat_id</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @settings.each do |setting| %>
+          <tr>
+            <td><%= setting.user.email %></td>
+            <td><%= setting.chat_id %></td>
+            <td>
+              <%= link_to 'Ver', admin_setting_path(setting), class: 'btn btn-small' %>
+              <%= link_to 'Editar', edit_admin_setting_path(setting), class: 'btn btn-small' %>
+              <%= link_to 'Eliminar', admin_setting_path(setting), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este setting?' }, class: 'btn btn-small red darken-2' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
