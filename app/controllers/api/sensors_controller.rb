@@ -10,7 +10,7 @@ module Api
     end
 
     def create
-      @sensor = current_bearer.sensors.new(create_sensor_params)
+      @sensor = Sensor.new(create_sensor_params)
 
         if @sensor.save
           render json: @sensor, status: :created

@@ -7,11 +7,11 @@ class User < ApplicationRecord
   has_many :buildings
   has_many :api_credentials
   has_many :emitters, through: :buildings
-  has_many :sensors
+  has_many :sensors, through: :emitters
 
-  has_one :setting
+  belongs_to :setting
 
-  after_create :create_setting
+  after_initialize :create_setting
 
   def admin?
     email == 'oldani.pablo@gmail.com'
@@ -20,6 +20,6 @@ class User < ApplicationRecord
   private
 
   def create_setting
-    self.setting ||= Setting.create(user: self)
+    self.setting ||= Setting.create
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_30_174342) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_01_000434) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_174342) do
     t.index ["building_id"], name: "index_emitters_on_building_id"
   end
 
+  create_table "notification_settings", force: :cascade do |t|
+    t.boolean "active"
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "cooldown"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sensors", force: :cascade do |t|
     t.integer "building_id"
     t.boolean "state"
@@ -49,8 +58,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_174342) do
     t.bigint "user_id"
     t.bigint "emitter_id"
     t.string "pin"
+    t.bigint "notification_setting_id"
     t.index ["building_id"], name: "index_sensors_on_building_id"
     t.index ["emitter_id"], name: "index_sensors_on_emitter_id"
+    t.index ["notification_setting_id"], name: "index_sensors_on_notification_setting_id"
     t.index ["user_id"], name: "index_sensors_on_user_id"
   end
 
@@ -70,8 +81,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_174342) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "setting_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["setting_id"], name: "index_users_on_setting_id"
   end
 
   add_foreign_key "api_credentials", "users"
@@ -79,6 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_174342) do
   add_foreign_key "emitters", "buildings"
   add_foreign_key "sensors", "buildings"
   add_foreign_key "sensors", "emitters"
+  add_foreign_key "sensors", "notification_settings"
   add_foreign_key "sensors", "users"
   add_foreign_key "settings", "users"
+  add_foreign_key "users", "settings"
 end

@@ -4,7 +4,7 @@ RSpec.describe "Api::Emitters", type: :request do
   let!(:user) { create(:user) }
   let!(:building) { create(:building, user: user) }
   let(:emitter) {create(:emitter, building: building)}
-  let(:sensor) { create(:sensor, name: 'Sensor1', state: true, user: user, emitter:emitter) }
+  let(:sensor) { create(:sensor, name: 'Sensor1', state: true, emitter:emitter) }
   let(:api_credential) { create(:api_credential, user: user) }
 
   let(:valid_attributes) {

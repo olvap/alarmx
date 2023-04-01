@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "Api::Sensors", type: :request do
-  let(:sensor) { create(:sensor, name: 'Sensor1', state: true, user: user) }
-  let(:building) { sensor.building }
-  let!(:user) { create(:user) }
+  let!(:sensor) { create(:sensor, name: 'Sensor1', state: true, emitter: emitter) }
+  let(:emitter) {create(:emitter, building: building)}
+  let(:building) { create :building, user: user }
+  let(:user) { create(:user) }
   let(:api_credential) { create(:api_credential, user: user) }
 
   let(:valid_attributes) {

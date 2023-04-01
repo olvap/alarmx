@@ -5,6 +5,8 @@ class Emitter < ApplicationRecord
 
   after_initialize :set_token
 
+  delegate :user, to: :building
+
   private
 
   def set_token

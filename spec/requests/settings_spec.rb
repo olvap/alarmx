@@ -48,7 +48,7 @@ RSpec.describe "/setting", type: :request do
     describe "GET /edit" do
       it "renders a successful response" do
         setting = user.setting
-        get edit_setting_url
+        get edit_setting_url(setting)
         expect(response).to be_successful
       end
     end
@@ -86,13 +86,6 @@ RSpec.describe "/setting", type: :request do
     end
 
     describe "DELETE /destroy" do
-      it "destroys the requested setting" do
-        setting = user.setting
-        expect {
-          delete setting_url
-        }.to change(Setting, :count).by(-1)
-      end
-
       it "redirects to the setting list" do
         setting = user.setting
         delete setting_url

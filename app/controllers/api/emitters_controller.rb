@@ -23,10 +23,8 @@ module Api
 
       if sensor.update(update_state_params)
         action_cable(sensor)
-        TelegramService.new.call(
-          current_bearer.setting.chat_id,
-          "Sensor: #{sensor.name} State: #{sensor.state}"
-        )
+
+        NotificationJob.perform_later(sensor)
 
         render json: sensor, status: :ok
       else
