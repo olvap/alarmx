@@ -3,4 +3,7 @@ import "@hotwired/turbo-rails"
 import "./components/WebSocket";
 import "./channels/sensors";
 
-M.AutoInit();
+function loadMaterialize(event) { M.AutoInit();}
+document.addEventListener("DOMContentLoaded", loadMaterialize)
+document.addEventListener('turbo:render', loadMaterialize)
+
