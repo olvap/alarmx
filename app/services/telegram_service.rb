@@ -6,7 +6,7 @@ class TelegramService
     self.token = token || ENV['TELEGRAM_BOT_TOKEN']
   end
 
-  def call(chat_id, message)
+  def send_notification(chat_id = nil, message = nil)
     return unless token
     return unless chat_id
 
