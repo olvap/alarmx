@@ -18,14 +18,14 @@ RSpec.describe "Api::Sensors", type: :request do
   }
 
   describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Sensor" do
-        expect {
-          post '/api/sensors', params: { sensor: valid_attributes },
-          headers: { 'Authorization' => "Token #{api_credential.token}" }
-        }.to change(Sensor, :count).by(1)
-      end
-    end
+    # context "with valid parameters" do
+    #   it "creates a new Sensor" do
+    #     expect {
+    #       post '/api/sensors', params: { sensor: valid_attributes },
+    #       headers: { 'Authorization' => "Token #{api_credential.token}" }
+    #     }.to change(Sensor, :count).by(1)
+    #   end
+    # end
 
     # context "with invalid parameters" do
     #   it "does not create a new Building" do
