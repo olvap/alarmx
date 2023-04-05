@@ -23,7 +23,7 @@
     <% if current_user %>
 
       <nav>
-        <div class="nav-wrapper blue">
+        <div id="nav-<%= controller_name %>-<%= params[:id]%>"class="nav-wrapper blue">
           <ul class="right">
             <li>
               <%= link_to sensors_path do %>

@@ -5,23 +5,18 @@
   <% end %>
 </h2>
 
-<button
-  id="state-button"
-  class="btn"
-  data-sensor-id="<%= @sensor.id %>"
-  data-new-state="<%= !@sensor.state%>"
-  >
-  <%= !@sensor.state%>
-</button>
-<div id="sensor-<%= @sensor.id%>">
-  <p>
-    <strong>Mac:</strong>
-    <%= @sensor.mac %>
-  </p>
-  <p>
-    <strong>State:</strong>
-    <%= @sensor.state %>
-  </p>
+<div class="switch">
+  <label>
+    Off
+    <input
+        id="sensor-checkbox-<%= @sensor.id %>"
+        data-sensor-id="<%= @sensor.id %>"
+        data-sensor-state="<%= @sensor.state %>"
+        class="switcher"
+        type="checkbox"
+        <% if @sensor.state %>checked <%end%>
+        >
+        <span class="lever"></span>
+        On
+  </label>
 </div>
-<div id="root"></div>
-

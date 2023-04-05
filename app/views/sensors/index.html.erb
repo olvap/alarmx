@@ -4,8 +4,25 @@
   <% @sensors.each do |sensor| %>
     <li
         id="sensor-<%= sensor.id%>"
-        class="collection-item <% if sensor.state  %>teal<% else %>red<% end %>" >
-      <%= link_to sensor.name, sensor_path(sensor) %>
+        class="collection-item <% if sensor.state  %>teal<% else %>red<% end %> lighten-4" >
+        <div class="left">
+        <%= link_to sensor.name, sensor_path(sensor) %>
+        </div>
+        <div class="switch right-align">
+          <label>
+            Off
+            <input
+                id="sensor-checkbox-<%= sensor.id %>"
+                data-sensor-id="<%= sensor.id %>"
+                data-sensor-state="<%= sensor.state %>"
+                class="switcher"
+                type="checkbox"
+                <% if sensor.state %>checked <%end%>
+            >
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
     </li>
   <% end %>
 </ul>

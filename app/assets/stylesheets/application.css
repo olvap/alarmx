@@ -39,5 +39,9 @@ body.pages {
 
 .collection-item.teal a,
 .collection-item.red a {
-  color: white;
+  color: black;
+}
+.nav-wrapper,
+.collection-item {
+  transition: background-color 0.5s ease;
 }

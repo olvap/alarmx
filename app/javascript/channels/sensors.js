@@ -7,6 +7,19 @@ consumer.subscriptions.create("SensorChannel", {
     const sensorState = data.sensor.state
 
     const sensorRow = document.getElementById(`sensor-${sensorId}`)
+    const navbar = document.getElementById(`nav-sensors-${sensorId}`)
+
+    if(navbar){
+      if(sensorState){
+        navbar.classList.remove('blue');
+        navbar.classList.remove('red');
+        navbar.classList.add('teal');
+      }else{
+        navbar.classList.remove('blue');
+        navbar.classList.add('red');
+        navbar.classList.remove('teal');
+      }
+    }
     console.log("tr: ", sensorRow)
     if (sensorRow) {
       if(sensorState){
