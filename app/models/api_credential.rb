@@ -6,6 +6,6 @@ class ApiCredential < ApplicationRecord
   private
 
   def generate_keys
-    self.token ||= SecureRandom.hex(16)
+    self.token ||= SecureRandom.hex(8)
   end
 end
