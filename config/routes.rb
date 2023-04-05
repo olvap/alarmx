@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       put '/:pin', to: 'emitters#update', as: 'emitter_sensor_update'
     end
     get 'emitters/:token/:mac/:pin/:state', to: 'emitters#update_temp', as: 'update_emitter'
+    put 'emitters/:token/:mac/:pin/:state', to: 'emitters#update_temp', as: 'put_update_emitter'
     resources :sensors, only: [:show, :create, :update] do
       member do
         get :mac
