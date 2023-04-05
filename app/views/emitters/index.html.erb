@@ -1,9 +1,0 @@
-<h2>Emitters</h2>
-
-<ul class="collection">
-  <% @emitters.each do |emitter| %>
-    <li class="collection-item">
-      <%= link_to emitter.name, building_emitter_path(emitter.building, emitter) %>
-    </li>
-  <% end %>
-</ul>

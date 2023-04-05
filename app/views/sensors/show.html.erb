@@ -5,6 +5,14 @@
   <% end %>
 </h2>
 
+<button
+  id="state-button"
+  class="btn"
+  data-sensor-id="<%= @sensor.id %>"
+  data-new-state="<%= !@sensor.state%>"
+  >
+  <%= !@sensor.state%>
+</button>
 <div id="sensor-<%= @sensor.id%>">
   <p>
     <strong>Mac:</strong>

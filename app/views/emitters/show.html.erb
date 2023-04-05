@@ -1,8 +1,0 @@
-<%= render @emitter %>
-
-<div>
-  <%= link_to 'Edit', edit_building_emitter_path(@emitter.building, @emitter) %> |
-  <%= link_to 'Back', building_emitters_path(@emitter.building) %>
-
-  <%= link_to 'Delete', building_emitter_path(@emitter.building, @emitter), method: :delete, data: { confirm: 'Are you sure?' } %>
-</div>

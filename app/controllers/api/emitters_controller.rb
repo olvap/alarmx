@@ -5,26 +5,14 @@ module Api
 
     prepend_before_action :authenticate_with_api_key!
 
-    def create
-      default_building = current_bearer.buildings.first
-      @emitter = default_building.emitters.new(emitter_params)
+    def update
+      mac = "#{params[:emitter_mac]}-#{params[:pin]}"
 
-      if @emitter.save
-        render json: @emitter, status: :created
-      else
-        render json: @emitter.errors, status: :unprocessable_entity
-      end
+      sensor = current_bearer.sensors.find_or_create_by(
+        mac: mac
+      )
 
-    end
-
-    def sensor_update
-      sensor = emitter.sensors.find_or_create_by(pin: params[:pin])
-
-
-      if sensor.update(update_state_params)
-        action_cable(sensor)
-
-        NotificationJob.perform_later(sensor)
+      if sensor.update(sensor_params)
 
         render json: sensor, status: :ok
       else
@@ -34,24 +22,8 @@ module Api
 
     private
 
-    def emitter
-      @emitter = Emitter.find_or_create_by(token: params[:emitter_token])
-    end
-
-    def emitter_params
-      params.require(:emitter).permit(:name)
-    end
-
-    def update_state_params
+    def sensor_params
       params.require(:sensor).permit(:state)
-    end
-
-    def action_cable(sensor)
-        ActionCable.server.broadcast(
-          "sensor_channel_#{sensor.id}",
-          { message: sensor.state.to_s }
-        )
-        ActionCable.server.broadcast 'sensor_channel', {sensor: sensor }
     end
   end
 end

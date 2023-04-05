@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_01_155144) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_172857) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,12 +31,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_155144) do
   end
 
   create_table "emitters", force: :cascade do |t|
-    t.bigint "building_id", null: false
     t.string "name"
     t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["building_id"], name: "index_emitters_on_building_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_emitters_on_user_id"
+  end
+
+  create_table "event_conditions", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "sensor_id", null: false
+    t.boolean "state"
+    t.boolean "trigger"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_conditions_on_event_id"
+    t.index ["sensor_id"], name: "index_event_conditions_on_sensor_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.bigint "notification_setting_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_setting_id"], name: "index_events_on_notification_setting_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "notification_settings", force: :cascade do |t|
@@ -47,6 +68,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_155144) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "last_send_at"
+    t.string "chat_id"
+    t.string "message"
+  end
+
+  create_table "scene_sensors", force: :cascade do |t|
+    t.bigint "sensor_id", null: false
+    t.bigint "scene_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "state"
+    t.boolean "trigger_event"
+    t.index ["scene_id"], name: "index_scene_sensors_on_scene_id"
+    t.index ["sensor_id"], name: "index_scene_sensors_on_sensor_id"
+  end
+
+  create_table "scenes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.bigint "notification_setting_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_setting_id"], name: "index_scenes_on_notification_setting_id"
+    t.index ["user_id"], name: "index_scenes_on_user_id"
   end
 
   create_table "sensors", force: :cascade do |t|
@@ -90,7 +134,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_155144) do
 
   add_foreign_key "api_credentials", "users"
   add_foreign_key "buildings", "users"
-  add_foreign_key "emitters", "buildings"
+  add_foreign_key "emitters", "users"
+  add_foreign_key "event_conditions", "events"
+  add_foreign_key "event_conditions", "sensors"
+  add_foreign_key "events", "notification_settings"
+  add_foreign_key "events", "users"
+  add_foreign_key "scene_sensors", "scenes"
+  add_foreign_key "scene_sensors", "sensors"
+  add_foreign_key "scenes", "notification_settings"
+  add_foreign_key "scenes", "users"
   add_foreign_key "sensors", "buildings"
   add_foreign_key "sensors", "emitters"
   add_foreign_key "sensors", "notification_settings"

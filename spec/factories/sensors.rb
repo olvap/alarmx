@@ -4,6 +4,6 @@ FactoryBot.define do
     state { false }
     pin { 2 }
     notification_setting
-    emitter
+    user
   end
 end

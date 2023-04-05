@@ -1,0 +1,36 @@
+<%= form_with(model: [event, event_condition]) do |form| %>
+  <% if event_condition.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(event_condition.errors.count, "error") %> prohibited this event_condition from being saved:</h2>
+
+      <ul>
+        <% event_condition.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :sensor_id, style: "display: block" %>
+    <%= form.collection_select :sensor_id, current_user.sensors, :id, :name %>
+  </div>
+
+  <div class="col s3">
+    <label>
+      <%= form.check_box :state, id: "state" %>
+      <span>State</span>
+    </label>
+  </div>
+
+  <div class="col s3">
+    <label>
+      <%= form.check_box :trigger, id: "trigger" %>
+      <span>Trigger</span>
+    </label>
+  </div>
+
+  <div>
+    <%= form.submit "Save", class: "btn" %>
+  </div>
+<% end %>

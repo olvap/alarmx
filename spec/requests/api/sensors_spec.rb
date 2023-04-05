@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Api::Sensors", type: :request do
-  let!(:sensor) { create(:sensor, name: 'Sensor1', state: true, emitter: emitter) }
-  let(:emitter) {create(:emitter, building: building)}
-  let(:building) { create :building, user: user }
+  let!(:sensor) { create(:sensor, name: 'Sensor1', state: true, user: user) }
   let(:user) { create(:user) }
   let(:api_credential) { create(:api_credential, user: user) }
 
@@ -16,26 +14,6 @@ RSpec.describe "Api::Sensors", type: :request do
   let(:invalid_attributes) {
     { states: nil }
   }
-
-  describe "POST /create" do
-    # context "with valid parameters" do
-    #   it "creates a new Sensor" do
-    #     expect {
-    #       post '/api/sensors', params: { sensor: valid_attributes },
-    #       headers: { 'Authorization' => "Token #{api_credential.token}" }
-    #     }.to change(Sensor, :count).by(1)
-    #   end
-    # end
-
-    # context "with invalid parameters" do
-    #   it "does not create a new Building" do
-    #     expect {
-    #       post '/api/sensors', params: { sensor: invalid_attributes },
-    #       headers: { 'Authorization' => "Token #{api_credential.token}" }
-    #     }.to change(Sensor, :count).by(0)
-    #   end
-    # end
-  end
 
   describe "GET /show" do
     before do

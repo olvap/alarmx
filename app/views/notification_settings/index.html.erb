@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Notification settings</h1>
+
+<div id="notification_settings">
+  <% @notification_settings.each do |notification_setting| %>
+    <%= render notification_setting %>
+    <p>
+      <%= link_to "Show this notification setting", notification_setting %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New notification setting", new_notification_setting_path %>

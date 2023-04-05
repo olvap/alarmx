@@ -4,10 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :buildings
   has_many :api_credentials
-  has_many :emitters, through: :buildings
-  has_many :sensors, through: :emitters
+  has_many :events
+  has_many :sensors
 
   belongs_to :setting
 

@@ -1,27 +1,23 @@
 class SensorsController < ApplicationController
+  protect_from_forgery with: :null_session
   before_action :set_sensor, only: %i[ show edit update destroy ]
 
-  # GET /sensors or /sensors.json
   def index
-    @sensors = Sensor.all
+    @sensors = current_user.sensors
   end
 
-  # GET /sensors/1 or /sensors/1.json
   def show
   end
 
-  # GET /sensors/new
   def new
     @sensor = Sensor.new
   end
 
-  # GET /sensors/1/edit
   def edit
   end
 
-  # POST /sensors or /sensors.json
   def create
-    @sensor = Sensor.new(sensor_params)
+    @sensor = current_user.sensors.new(sensor_params)
 
     respond_to do |format|
       if @sensor.save
@@ -34,7 +30,6 @@ class SensorsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /sensors/1 or /sensors/1.json
   def update
     respond_to do |format|
       if @sensor.update(sensor_params)
@@ -47,7 +42,6 @@ class SensorsController < ApplicationController
     end
   end
 
-  # DELETE /sensors/1 or /sensors/1.json
   def destroy
     @sensor.destroy
 
@@ -58,13 +52,12 @@ class SensorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sensor
-      @sensor = Sensor.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def sensor_params
-      params.require(:sensor).permit(:name, :mac, :building_id)
-    end
+  def set_sensor
+    @sensor = Sensor.find(params[:id])
+  end
+
+  def sensor_params
+    params.require(:sensor).permit(:name, :state, :mac)
+  end
 end

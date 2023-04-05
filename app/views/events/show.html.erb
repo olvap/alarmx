@@ -1,0 +1,35 @@
+<div id="<%= dom_id @event %>">
+  <h1>
+    <%= @event.name %>
+  </h1>
+</div>
+
+<h2>Conditions</h2>
+<ul class="collection">
+  <% @event.event_conditions.each do |event_condition| %>
+    <li class="collection-item" >
+      <% if event_condition.trigger %>
+        If
+      <% else %>
+        When
+      <% end %>
+      <%= link_to event_condition.sensor.name, event_event_condition_path(
+        event_condition.event,
+        event_condition
+      ) %> <%= event_condition.trigger ? 'change to ': 'is'%> <%= event_condition.state%>
+    </li>
+  <% end %>
+</ul>
+<div class="right-align">
+  <%= link_to new_event_event_condition_path(@event), class: "btn-floating waves-effect waves-light" do %>
+  <i class="material-icons">add</i>
+<% end %>
+</div>
+
+<h2>Action</h2>
+<p><b>Send this message</b>
+<%= @event.notification_setting.message %><p>
+<p><b>To</b>
+<%= @event.notification_setting.chat_id %><p>
+
+<%= link_to "Edit Notification Settings", edit_notification_setting_path(@event.notification_setting) %>

@@ -17,16 +17,6 @@
   </div>
 
   <div>
-    <%= form.label :mac, style: "display: block" %>
-    <%= form.text_field :mac %>
-  </div>
-
-  <div>
-    <%= form.label :building_id, style: "display: block" %>
-    <%= form.collection_select :building_id, current_user.buildings, :id, :name %>
-  </div>
-
-  <div>
     <%= form.submit "Save", class: "btn" %>
   </div>
 <% end %>

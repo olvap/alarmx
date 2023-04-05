@@ -1,13 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Sensor, type: :model do
+describe Sensor, type: :model do
   context "when creating a new sensor" do
-    let(:emitter) { create(:emitter) }
-    let(:user) { building.user }
-    let(:sensor) { create(:sensor, emitter: emitter) }
+    let(:user) { create(:user) }
+    let(:sensor) { create(:sensor, user: user) }
 
-    it "has a reference to emitter" do
-      expect(sensor.emitter).to eq(emitter)
+    it "has a reference to user" do
+      expect(sensor.user).to eq(user)
     end
 
     it "has state set to false by default" do

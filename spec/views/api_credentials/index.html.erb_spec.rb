@@ -11,6 +11,6 @@ RSpec.describe "api_credentials/index", type: :view do
 
   it "renders a list of api_credentials" do
     render
-    cell_selector = Rails::VERSION::STRING >= '7' ? 'div>p' : 'tr>td'
+    'div>p'
   end
 end

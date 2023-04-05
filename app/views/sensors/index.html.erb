@@ -1,12 +1,16 @@
 <h1>Sensors</h1>
 
-<div id="sensors">
+<ul class="collection">
   <% @sensors.each do |sensor| %>
-    <%= render sensor %>
-    <p>
-      <%= link_to "Show this sensor", sensor %>
-    </p>
+    <li
+        id="sensor-<%= sensor.id%>"
+        class="collection-item <% if sensor.state  %>teal<% else %>red<% end %>" >
+      <%= link_to sensor.name, sensor_path(sensor) %>
+    </li>
   <% end %>
+</ul>
+<div class="right-align">
+  <%= link_to new_sensor_path, class: "btn-floating waves-effect waves-light" do %>
+  <i class="material-icons">add</i>
+<% end %>
 </div>
-
-<%= link_to "New sensor", new_sensor_path %>
