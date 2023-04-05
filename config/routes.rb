@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :emitters, param: :mac, only: [:create] do
-      put '/:pin', to: 'emitters#update', as: 'emitter_sensor_update'
+      get '/:pin', to: 'emitters#update', as: 'emitter_sensor_update'
     end
     resources :sensors, only: [:show, :create, :update] do
       member do
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :api_credentials
     resources :sensors
     resources :users
     resources :settings
