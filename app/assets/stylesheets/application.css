@@ -4,6 +4,9 @@
  *= require_self
  */
 
+body {
+  min-height: 100vh;
+}
 h1 {
   font-size: 2rem;
 }
@@ -44,4 +47,9 @@ body.pages {
 .nav-wrapper,
 .collection-item {
   transition: background-color 0.5s ease;
+}
+#action-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

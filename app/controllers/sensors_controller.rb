@@ -43,17 +43,23 @@ class SensorsController < ApplicationController
   end
 
   def destroy
-    @sensor.destroy
+    begin
+      @sensor.destroy
 
-    respond_to do |format|
-      format.html { redirect_to sensors_url, notice: "Sensor was successfully destroyed." }
-      format.json { head :no_content }
+      respond_to do |format|
+        format.html { redirect_to sensors_url, notice: "Sensor was successfully destroyed." }
+        format.json { head :no_content }
+      end
+
+    rescue ActiveRecord::DeleteRestrictionError
+      redirect_to sensors_path, alert: "No puedes eliminar un Sensor que tiene EventConditions relacionados"
     end
   end
 
   private
 
   def set_sensor
+    # @sensor = current_user.sensors.find(params[:id])
     @sensor = Sensor.find(params[:id])
   end
 

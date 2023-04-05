@@ -4,6 +4,16 @@
 
 <br>
 
-<div>
-  <%= link_to "Show this sensor", @sensor %> |
-</div>
+<% content_for :navbar_buttons do %>
+  <li>
+    <%= link_to "Cancel", @sensor, class: 'btn btn-flat' %>
+  </li>
+  <li>
+    <%= link_to sensor_path(@sensor), class: 'btn red', data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+    } do %>
+      <i class="material-icons">delete</i>
+  <% end %>
+  </li>
+<% end %>

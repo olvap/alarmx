@@ -1,0 +1,11 @@
+<% if content_for?(:navbar_buttons) %>
+  <div id="action-bar">
+    <nav class="blue-grey lighten-5">
+      <div class="nav-wrapper">
+        <ul class="right">
+          <%= yield :navbar_buttons %>
+        </ul>
+      </div>
+    </nav>
+  </div>
+<% end %>
