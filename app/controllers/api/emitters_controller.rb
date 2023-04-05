@@ -13,10 +13,17 @@ module Api
       )
 
       if sensor.update(sensor_params)
-
         render json: sensor, status: :ok
-      else
-        render json: { errors: @emitter.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+
+    def update_temp
+      mac = "#{params[:emitter_mac]}-#{params[:pin]}"
+      token = params[:token]
+      user = ApiCredential.find_by(token: token).user
+      sensor = user.sensors.find_or_create_by(mac: mac)
+      if sensor.update(state: params[:state])
+        render json: sensor, status: :ok
       end
     end
 
