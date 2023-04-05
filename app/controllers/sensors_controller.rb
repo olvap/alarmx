@@ -1,5 +1,5 @@
 class SensorsController < ApplicationController
-  protect_from_forgery with: :null_session
+  before_action :authenticate_user!
   before_action :set_sensor, only: %i[ show edit update destroy ]
 
   def index
@@ -59,8 +59,7 @@ class SensorsController < ApplicationController
   private
 
   def set_sensor
-    # @sensor = current_user.sensors.find(params[:id])
-    @sensor = Sensor.find(params[:id])
+    @sensor = current_user.sensors.find(params[:id])
   end
 
   def sensor_params

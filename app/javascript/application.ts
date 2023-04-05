@@ -8,9 +8,14 @@ document.addEventListener("DOMContentLoaded", loadMaterialize);
 document.addEventListener("turbo:render", loadMaterialize);
 
 function changeState(sensorId, newState) {
+  const csrfToken = document.getElementsByName("csrf-token")[0].content;
+
   $.ajax({
     url: "/sensors/" + sensorId + ".json",
     type: "PUT",
+    headers: {
+      "X-CSRF-Token": csrfToken
+    },
     data: { sensor: { state: newState } },
     success: function (data) {
       $("#state-button").data("newState", !data.state);
