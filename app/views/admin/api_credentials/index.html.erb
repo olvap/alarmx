@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col s12">
+    <h3>Sensores</h3>
+    <%= link_to 'Nuevo edificio', new_admin_api_credential_path, class: 'btn btn-small' %>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @api_credentials.each do |api_credential| %>
+          <tr>
+            <td><%= api_credential.token %></td>
+            <td>
+              <%= link_to 'Ver', admin_api_credential_path(api_credential), class: 'btn btn-small' %>
+              <%= link_to 'Editar', edit_admin_api_credential_path(api_credential), class: 'btn btn-small' %>
+              <%= link_to 'Eliminar', admin_api_credential_path(api_credential), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este edificio?' }, class: 'btn btn-small red darken-2' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

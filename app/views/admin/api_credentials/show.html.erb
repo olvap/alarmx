@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col s12">
+    <h3><%= @api_credential.name %></h3>
+    <p><strong>Propietario:</strong> <%= @api_credential.building.name %></p>
+    <%= link_to 'Editar', edit_admin_api_credential_path(@api_credential), class: 'btn btn-small' %>
+    <%= link_to 'Eliminar', admin_api_credential_path(@api_credential), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este api_credential?' }, class: 'btn btn-small red darken-2' %>
+  </div>
+</div>
+

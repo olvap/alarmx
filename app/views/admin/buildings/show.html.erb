@@ -1,9 +1,0 @@
-<div class="row">
-  <div class="col s12">
-    <h3><%= @building.name %></h3>
-    <p><strong>Propietario:</strong> <%= @building.user.email %></p>
-    <%= link_to 'Editar', edit_admin_building_path(@building), class: 'btn btn-small' %>
-    <%= link_to 'Eliminar', admin_building_path(@building), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este edificio?' }, class: 'btn btn-small red darken-2' %>
-  </div>
-</div>
-

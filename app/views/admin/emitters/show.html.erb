@@ -1,9 +1,0 @@
-<div class="row">
-  <div class="col s12">
-    <h3><%= @emitter.name %></h3>
-    <p><strong>Propietario:</strong> <%= @emitter.building.name %></p>
-    <%= link_to 'Editar', edit_admin_emitter_path(@emitter), class: 'btn btn-small' %>
-    <%= link_to 'Eliminar', admin_emitter_path(@emitter), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este edificio?' }, class: 'btn btn-small red darken-2' %>
-  </div>
-</div>
-

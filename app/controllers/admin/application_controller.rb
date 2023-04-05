@@ -30,6 +30,7 @@ class Admin::ApplicationController < ApplicationController
   end
 
   def update
+    binding.pry
     @resource = instance_variable_set(
       resource_variable_name,
       model.new(admin_resource_params)

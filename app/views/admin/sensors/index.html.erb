@@ -6,7 +6,6 @@
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>Emitter</th>
           <th>State</th>
           <th>Acciones</th>
         </tr>
@@ -15,7 +14,6 @@
         <% @sensors.each do |sensor| %>
           <tr>
             <td><%= sensor.name %></td>
-            <td><%= sensor.emitter&.name %></td>
             <td><%= sensor.state %></td>
             <td>
               <%= link_to 'Ver', admin_sensor_path(sensor), class: 'btn btn-small' %>
