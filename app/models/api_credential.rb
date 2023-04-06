@@ -1,11 +1,13 @@
 class ApiCredential < ApplicationRecord
   belongs_to :user
   validates :token, uniqueness: true
-  after_initialize :generate_keys
+  before_create :generate_keys
 
   private
 
   def generate_keys
-    self.token ||= SecureRandom.hex(8)
+    begin
+      self.token ||= SecureRandom.hex(8)
+    end while self.class.exists?(token: token)
   end
 end
