@@ -1,7 +1,6 @@
 <div class="row">
   <div class="col s12">
     <h3><%= @sensor.name %></h3>
-    <p><strong>Propietario:</strong> <%= @sensor.building.name %></p>
     <%= link_to 'Editar', edit_admin_sensor_path(@sensor), class: 'btn btn-small' %>
     <%= link_to 'Eliminar', admin_sensor_path(@sensor), method: :delete, data: { confirm: '¿Estás seguro de que quieres eliminar este sensor?' }, class: 'btn btn-small red darken-2' %>
   </div>

@@ -30,12 +30,11 @@ class Admin::ApplicationController < ApplicationController
   end
 
   def update
-    binding.pry
     @resource = instance_variable_set(
       resource_variable_name,
-      model.new(admin_resource_params)
+      resource
     )
-    respond_to do |format|
+    respond_t do |format|
       if @resource.update(admin_resource_params)
         format.html {
           redirect_to polymorphic_url([:admin, @resource]), notice: "#{model}  successfully updated."

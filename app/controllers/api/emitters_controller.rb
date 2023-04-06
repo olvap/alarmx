@@ -13,6 +13,7 @@ module Api
       )
 
       if sensor.update(sensor_params)
+        SensorUpdateService.new(sensor).update
         render json: sensor, status: :ok
       end
     end
