@@ -6,8 +6,7 @@ class SensorUpdateService
   def update
     return unless sensor.previous_changes.include? 'state'
     action_cable
-    return if sensor.triggers.empty?
-    sensor.triggers.map(&:event).map { |event| perform(event) }
+    send_notifications
   end
 
   private
@@ -22,12 +21,28 @@ class SensorUpdateService
     ActionCable.server.broadcast 'sensor_channel', {sensor: sensor }
   end
 
-  def perform(event)
-    return unless event.all_conditions_checked?
+  def telegram_service
+    @telegram_service ||= TelegramService.new
+  end
 
-    TelegramService.new.send_notification(
-      event.notification_setting.chat_id,
-      event.notification_setting.message
-    )
+  def send_notifications
+    events_to_notify =
+      Event.joins(:event_conditions)
+      .where(
+        event_conditions: {
+          sensor_id: @sensor.id,
+          state: @sensor.state,
+          trigger: true
+        }
+      )
+
+    events_to_notify.each do |event|
+      next unless event.all_conditions_checked?
+
+      telegram_service.send_notification(
+        event.notification_setting.chat_id,
+        event.notification_setting.message
+      )
+    end
   end
 end
