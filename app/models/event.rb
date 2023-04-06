@@ -7,21 +7,19 @@ class Event < ApplicationRecord
   after_initialize :create_setting
 
   def all_conditions_checked?
-    event_conditions.pluck(:sensor_id, :state) == sensors.pluck(:sensor_id, :state)
-  end
-
-  def perform
-    return unless all_conditions_checked?
-
-    TelegramService.new.send_notification(
-      notification_setting.chat_id,
-      notification_setting.message
-    )
+    event_conditions.where(
+      "NOT EXISTS (
+         SELECT 1 FROM sensors
+         WHERE sensors.id = event_conditions.sensor_id
+         AND sensors.state <> event_conditions.state
+         AND sensors.user_id = ?
+       )", user_id
+    ).count == event_conditions.count
   end
 
   private
 
   def create_setting
-    self.notification_setting ||= NotificationSetting.create
+    self.notification_setting ||= NotificationSetting.find_or_initialize_by(event: self)
   end
 end

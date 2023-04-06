@@ -1,3 +1,3 @@
 class NotificationSetting < ApplicationRecord
-  has_one :sensor
+  has_one :event
 end
