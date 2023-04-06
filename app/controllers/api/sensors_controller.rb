@@ -11,6 +11,8 @@ module Api
 
     def update
       if sensor.update(sensor_params)
+        SensorUpdateService.new(sensor).update
+
         render json: sensor, status: :ok
       else
         render json: { errors: @sensor.errors.full_messages }, status: :unprocessable_entity

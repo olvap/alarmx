@@ -19,6 +19,6 @@ class User < ApplicationRecord
   private
 
   def create_setting
-    self.setting ||= Setting.create
+    self.setting ||= Setting.find_or_initialize_by(user: self)
   end
 end

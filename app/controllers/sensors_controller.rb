@@ -33,6 +33,7 @@ class SensorsController < ApplicationController
   def update
     respond_to do |format|
       if @sensor.update(sensor_params)
+        SensorUpdateService.new(@sensor).update
         format.html { redirect_to sensor_url(@sensor), notice: "Sensor was successfully updated." }
         format.json { render :show, status: :ok, location: @sensor }
       else

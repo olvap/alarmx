@@ -17,7 +17,6 @@ class Event < ApplicationRecord
       notification_setting.chat_id,
       notification_setting.message
     )
-
   end
 
   private
