@@ -22,7 +22,7 @@ module Api
     private
 
     def sensor
-      @sensor = current_bearer.sensors.find(params[:id])
+      @sensor ||= current_bearer.sensors.find(params[:id])
     end
 
     def create_sensor_params

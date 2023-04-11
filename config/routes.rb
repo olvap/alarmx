@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :notification_settings
 
   namespace :api do
+      get 'emitters/:token/:mac/:pin/:state', to: 'emitters#update_temp', as: 'update_emitter'
     resources :emitters, param: :mac, only: [:create] do
       put '/:pin', to: 'emitters#update', as: 'emitter_sensor_update'
     end

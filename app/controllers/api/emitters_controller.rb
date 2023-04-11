@@ -3,11 +3,12 @@ module Api
     protect_from_forgery with: :null_session
     include ApiKeyAuthenticatable
 
-    prepend_before_action :authenticate_with_api_key!
+    # prepend_before_action :authenticate_with_api_key!
 
     def update
       mac = "#{params[:emitter_mac]}-#{params[:pin]}"
 
+      current_bearer = User.first
       sensor = current_bearer.sensors.find_or_create_by(
         mac: mac
       )
@@ -31,7 +32,7 @@ module Api
     private
 
     def sensor_params
-      params.require(:sensor).permit(:state)
+      params.require(:sensor).permit(:state, :pin)
     end
   end
 end
