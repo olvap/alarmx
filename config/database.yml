@@ -1,10 +1,6 @@
 default: &default
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['DATABASE_USERNAME'] || 'postgres' %>
-  password: <%= ENV['DATABASE_PASSWORD'] || 'postgres' %>
-  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
 
 development:
   <<: *default
@@ -17,5 +13,4 @@ test:
 production:
   <<: *default
   database: alarmx_production
-  url: <%= ENV['DATABASE_URL'] %>
 
